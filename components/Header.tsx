@@ -29,7 +29,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full flex justify-center py-3 bg-red-700 relative z-50">
+    <header className="w-full flex justify-center py-3 h-20 bg-red-700 relative z-50">
       <div className="w-[90%] lg:w-[80%] flex items-center justify-between py-4 px-6">
         {/* Logo */}
         <Link
@@ -39,7 +39,7 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt="Logo"
-            width={80}
+            width={100}
             height={20}
             priority
             className="drop-shadow-md transition-shadow duration-200"
