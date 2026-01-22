@@ -39,7 +39,7 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt="Logo"
-            width={140}
+            width={80}
             height={20}
             priority
             className="drop-shadow-md transition-shadow duration-200"
