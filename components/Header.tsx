@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Menu, X } from "lucide-react";
 
 type NavLink = {
   label: string;
@@ -17,14 +18,19 @@ const navLinks: NavLink[] = [
 
 export default function Header() {
   const [language, setLanguage] = useState<"FR" | "EN">("FR");
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "FR" ? "EN" : "FR"));
   };
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((prev) => !prev);
+  };
+
   return (
-    <header className="w-full flex justify-center h-20 py-3">
-      <div className="w-[80%] flex items-center justify-between py-4 bg-red-700 px-6 rounded-b-lg shadow-lg">
+    <header className="w-full flex justify-center py-3 bg-red-700 shadow-lg relative z-50">
+      <div className="w-[90%] lg:w-[80%] flex items-center justify-between py-4 px-6 rounded-b-lg">
         {/* Logo */}
         <Link
           href="/"
@@ -40,8 +46,8 @@ export default function Header() {
           />
         </Link>
 
-        {/* Navigation */}
-        <nav className="flex gap-8">
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -61,11 +67,11 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Language Switch */}
+        {/* Desktop Language Switch */}
         <button
           onClick={toggleLanguage}
           className="
-            px-4 py-1.5 border border-white text-white rounded-md text-sm font-semibold
+            hidden lg:block px-4 py-1.5 border border-white text-white rounded-md text-sm font-semibold
             hover:bg-white hover:text-red-700
             active:scale-95 active:shadow-[0_0_12px_rgba(255,255,255,0.7)]
             transition-all duration-200
@@ -73,6 +79,50 @@ export default function Header() {
         >
           {language}
         </button>
+
+        {/* Mobile Burger */}
+        <button
+          onClick={toggleMobileMenu}
+          className="lg:hidden text-white p-2 rounded-md hover:bg-red-600 transition"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 bg-red-900 bg-opacity-95 backdrop-blur-md z-40 transform transition-transform duration-300 ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col h-full justify-center items-center gap-8">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="
+                text-white text-2xl font-bold hover:text-red-300 transition-colors
+                active:scale-95 active:shadow-[0_0_12px_rgba(255,255,255,0.7)]
+              "
+            >
+              {link.label}
+            </Link>
+          ))}
+
+          {/* Mobile Language Switch */}
+          <button
+            onClick={toggleLanguage}
+            className="
+              px-6 py-2 border border-white text-white rounded-md text-lg font-semibold
+              hover:bg-white hover:text-red-700
+              active:scale-95 active:shadow-[0_0_12px_rgba(255,255,255,0.7)]
+              transition-all duration-200
+            "
+          >
+            {language}
+          </button>
+        </div>
       </div>
     </header>
   );
