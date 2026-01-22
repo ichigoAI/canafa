@@ -29,8 +29,8 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full flex justify-center py-3 bg-transparent  relative z-50">
-      <div className="w-[90%] lg:w-[80%] flex items-center justify-between bg-red-700 h-15 py-4 px-6 rounded-b-lg">
+    <header className="w-full flex justify-center py-3 bg-red-700 relative z-50">
+      <div className="w-[90%] lg:w-[80%] flex items-center justify-between py-4 px-6">
         {/* Logo */}
         <Link
           href="/"
