@@ -30,9 +30,9 @@ export default function Footer() {
         {/* Logo + description */}
         <div className="lg:col-span-2">
           <div className="flex items-center space-x-3 mb-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-600 to-white flex items-center justify-center shadow-lg">
             <Image
-              src="/logoblanc.png"
+              src="/logo.png"
               alt="Logo"
               width={140}
               height={20}

@@ -29,15 +29,15 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full flex justify-center py-3 bg-red-700 shadow-lg relative z-50">
-      <div className="w-[90%] lg:w-[80%] flex items-center justify-between py-4 px-6 rounded-b-lg">
+    <header className="w-full flex justify-center py-3 bg-transparent  relative z-50">
+      <div className="w-[90%] lg:w-[80%] flex items-center justify-between bg-red-700 h-15 py-4 px-6 rounded-b-lg">
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center transition-transform duration-300 hover:scale-105 active:scale-95"
+          className="flex items-center transition-transform duration-300 hover:scale-105 active:scale-95 bg-white rounded-full"
         >
           <Image
-            src="/logoblanc.png"
+            src="/logo.png"
             alt="Logo"
             width={140}
             height={20}
@@ -95,6 +95,13 @@ export default function Header() {
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
+        {/* Close button (mobile) */}
+<button
+  onClick={() => setMobileMenuOpen(false)}
+  className="absolute top-6 right-6 text-white p-2 rounded-md hover:bg-red-700 transition"
+>
+  <X size={28} />
+</button>
         <div className="flex flex-col h-full justify-center items-center gap-8">
           {navLinks.map((link) => (
             <Link
