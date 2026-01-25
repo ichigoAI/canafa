@@ -7,7 +7,7 @@ import { Facebook, Twitter, Linkedin, Instagram, Mail, MapPin, Phone } from "luc
 export default function Footer() {
   const quickLinks = [
     { href: "/about", label: "À Propos" },
-    { href: "/program", label: "Programme" },
+    { href: "#program", label: "Programme" },
     { href: "/contest", label: "Concours" },
     { href: "/exhibitors", label: "Exposants" },
     { href: "/contact", label: "Contact" },

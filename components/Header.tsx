@@ -13,6 +13,7 @@ type NavLink = {
 const navLinks: NavLink[] = [
   { label: "À propos", href: "/about" },
   { label: "Concours", href: "/concours" },
+    { label: "Programme", href: "#program" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -31,7 +32,6 @@ export default function Header() {
   return (
     <header className="w-full flex justify-center py-3 h-20 bg-red-700 relative z-50">
       <div className="w-[90%] lg:w-[80%] flex items-center justify-between py-4 px-6">
-        {/* Logo */}
         <Link
           href="/"
           className="flex items-center transition-transform duration-300 hover:scale-105 active:scale-95 bg-white rounded-full"
@@ -46,7 +46,6 @@ export default function Header() {
           />
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden lg:flex gap-8">
           {navLinks.map((link) => (
             <Link
@@ -67,7 +66,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Desktop Language Switch */}
         <button
           onClick={toggleLanguage}
           className="
@@ -80,7 +78,6 @@ export default function Header() {
           {language}
         </button>
 
-        {/* Mobile Burger */}
         <button
           onClick={toggleMobileMenu}
           className="lg:hidden text-white p-2 rounded-md hover:bg-red-600 transition"
@@ -88,14 +85,11 @@ export default function Header() {
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
-
-      {/* Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 bg-red-900 bg-opacity-95 backdrop-blur-md z-40 transform transition-transform duration-300 ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Close button (mobile) */}
 <button
   onClick={() => setMobileMenuOpen(false)}
   className="absolute top-6 right-6 text-white p-2 rounded-md hover:bg-red-700 transition"
@@ -117,7 +111,6 @@ export default function Header() {
             </Link>
           ))}
 
-          {/* Mobile Language Switch */}
           <button
             onClick={toggleLanguage}
             className="
