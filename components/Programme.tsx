@@ -1,47 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const programmes = [
-  {
-    day: "Jour 1",
-    title: "08 Juillet",
-    description:
-      "Ouverture officielle, plénière Ministerielle et Cocktail de réseautage.",
-    side: "left",
-  },
-  {
-    day: "Jour 2",
-    title: "9 Juillet",
-    description:
-      "Ateliers thématiques (Agriculture, Mines, Tech), Rencontres B2B et Salon des exposants.",
-    side: "right",
-  },
-  {
-    day: "Jour 3",
-    title: "10 Juillet",
-    description:
-      "Finale du Concours Entrepreneuriat Diaspora, Remise du prix de 5 000 $ et Dîner de gala.",
-    side: "left",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Programme() {
+  const { t } = useLanguage();
+
   return (
     <section
       className="w-full bg-white py-20 overflow-x-hidden"
       id="program"
     >
       <h1 className="text-center text-4xl font-bold text-red-600 mb-16">
-        Notre programme :
+        {t.program.title}
       </h1>
 
       <div className="relative max-w-5xl mx-auto px-6">
-        {/* Ligne centrale */}
         <div className="absolute left-1/2 top-0 h-full w-1 bg-red-500 -translate-x-1/2" />
 
         <div className="flex flex-col gap-16">
-          {programmes.map((item, index) => (
+          {t.program.days.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
@@ -52,16 +30,14 @@ export default function Programme() {
                 item.side === "left" ? "justify-start" : "justify-end"
               }`}
             >
-              {/* Point */}
               <span className="absolute left-1/2 top-8 h-5 w-5 bg-white border-4 border-red-500 rounded-full -translate-x-1/2 z-10" />
 
-              {/* Card */}
               <div className="w-[45%] bg-red-50 border border-red-200 rounded-xl p-6 shadow-lg hover:shadow-red-200 transition-shadow duration-300">
                 <h3 className="text-red-600 font-semibold text-sm mb-1">
                   {item.day}
                 </h3>
                 <h2 className="text-xl font-bold text-red-700 mb-2">
-                  {item.title}
+                  {item.date}
                 </h2>
                 <p className="text-gray-700 leading-relaxed">
                   {item.description}

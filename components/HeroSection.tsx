@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 type TimeLeft = {
   days: number;
@@ -13,6 +14,7 @@ type TimeLeft = {
 const EVENT_DATE = new Date("2026-07-08T09:00:00");
 
 export default function HeroSection() {
+  const { t } = useLanguage();
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -37,7 +39,7 @@ export default function HeroSection() {
         ),
         seconds: Math.floor((distance % (1000 * 60)) / 1000),
       });
-    }, 1000); // ⏱️ chaque seconde
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -47,47 +49,39 @@ export default function HeroSection() {
       className="relative min-h-screen w-full bg-cover bg-center flex items-center"
       style={{ backgroundImage: "url('/bghero.jpeg')" }}
     >
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/60" />
 
-      {/* Contenu */}
       <div className="relative w-full px-6 lg:px-24 flex justify-between items-start">
-        {/* Texte */}
         <div className="max-w-2xl flex gap-6">
           <div className="w-1 bg-white rounded-full" />
 
           <div className="text-white">
             <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight">
-              Le Sommet Économique Canada-Afrique.
+              {t.hero.title}
             </h1>
 
             <h2 className="mt-4 text-2xl font-semibold text-red-300">
-              Bâtir des ponts durables entre l'innovation canadienne et le
-              dynamisme africain.
+              {t.hero.subtitle}
             </h2>
 
-            <p className="mt-4 text-gray-200">
-              Dates : 8 au 10 Juillet 2026 | Montréal, Canada.
-            </p>
+            <p className="mt-4 text-gray-200">{t.hero.date}</p>
 
             <div className="mt-8 flex gap-4 flex-wrap">
               <button className="px-6 py-3 bg-red-600 rounded-md font-semibold hover:bg-red-700 transition">
-                Devenir partenaire
+                {t.hero.partnerBtn}
               </button>
               <button className="px-6 py-3 border border-white rounded-md font-semibold hover:bg-white hover:text-red-700 transition">
-                Exposant
+                {t.hero.exhibitorBtn}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Card desktop */}
         <div className="hidden lg:block">
           <GlassCounter timeLeft={timeLeft} />
         </div>
       </div>
 
-      {/* Counter mobile */}
       <div className="lg:hidden absolute bottom-6 left-1/2 -translate-x-1/2">
         <GlassCounter timeLeft={timeLeft} />
       </div>
@@ -95,26 +89,30 @@ export default function HeroSection() {
   );
 }
 
+
 /* ------------------------------------------------ */
 /* Glasmorphic Counter */
 /* ------------------------------------------------ */
 
 function GlassCounter({ timeLeft }: { timeLeft: TimeLeft }) {
+  const { t } = useLanguage();
+
   return (
     <div className="backdrop-blur-xl bg-white/20 border border-white/30 rounded-xl px-6 py-4 text-white shadow-2xl">
       <p className="text-xs uppercase tracking-wide text-gray-200 text-center">
-        Ouverture dans
+        {t.hero.counterLabel}
       </p>
 
       <div className="mt-4 flex gap-5 justify-center">
-        <AnimatedUnit value={timeLeft.days} label="Jours" />
-        <AnimatedUnit value={timeLeft.hours} label="Heures" />
-        <AnimatedUnit value={timeLeft.minutes} label="Min" />
-        <AnimatedUnit value={timeLeft.seconds} label="Sec" />
+        <AnimatedUnit value={timeLeft.days} label={t.hero.days} />
+        <AnimatedUnit value={timeLeft.hours} label={t.hero.hours} />
+        <AnimatedUnit value={timeLeft.minutes} label={t.hero.minutes} />
+        <AnimatedUnit value={timeLeft.seconds} label={t.hero.seconds} />
       </div>
     </div>
   );
 }
+
 
 /* ------------------------------------------------ */
 /* Animated Counter Unit */
